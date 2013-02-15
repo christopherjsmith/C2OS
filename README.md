@@ -22,14 +22,14 @@ This section list the tools you will need to build and run this project. Assumin
 ### 2 Build process
 This section describes how to build the current source code. This should be updated whenever the build prcoess changes. In the next revisions we should look at implementing *make scripts* which will allow the build process to stay fixed. In the mean time this will do.
 
-    cd boot/
-    nasm boot_sect.asm -f bin -o boot_sect.bin
-    nasm kernel_ent.asm -f elf -o kernel_ent.o
+cd boot/
+nasm boot_sect.asm -f bin -o boot_sect.bin
+nasm kernel_ent.asm -f elf -o kernel_ent.o
 
-    cd ../kernel/
+    cd ../kernel/ 
 
-    gcc -m32 -ffreestanding -c kernel.c -o kernel.o
-    ld -m elf_i386 -o kernel.bin -Ttext 0x1000 ../boot/kernel_ent.o kernel.o --oforma$
+    gcc -m32 -ffreestanding -c kernel.c busio.c
+    ld -m elf_i386 -o kernel.bin -Ttext 0x1000 ../boot/kernel_ent.o busio.o kernel.o --oformat binary
 
     cd ..
     cat boot/boot_sect.bin kernel/kernel.bin > os-image.bin

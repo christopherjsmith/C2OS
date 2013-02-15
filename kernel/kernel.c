@@ -3,6 +3,11 @@
 #define WHITE_ON_BLACK 0x0F
 #define VIDEO_MEMORY 0xB8000
 
+#define CTRL 0x3D4
+#define DATA 0x3D5
+
+#include "include/busio.h"
+
 void printX() {
     unsigned char* video_mem = (unsigned char*) VIDEO_MEMORY;
     *video_mem = 'X';
@@ -24,4 +29,9 @@ void main() {
     }
     
     printX();
+    
+    byte_out(CTRL, 14);
+    byte_out(DATA, 0x00);
+    byte_out(CTRL, 15);
+    byte_out(DATA, 0x00);
 }

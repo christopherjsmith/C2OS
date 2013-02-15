@@ -34,12 +34,12 @@ This section describes how to build the current source code. This should be upda
 
 or see the added build script in root dir
 
-    ./build
+    ./build.sh
 
 if you get permission denied run
 
-    chmod +x ./build
-    ./build
+    chmod +x ./build.sh
+    ./build.sh
 
 Run as follows:
 

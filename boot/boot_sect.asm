@@ -14,11 +14,11 @@ call switch_to_pm
 
 jmp $
 
-%include "print.asm"
-%include "disk_load.asm"
-%include "gdt.asm"
-%include "print32.asm"
-%include "switch_pm.asm"
+%include "screen/print.asm"
+%include "disk/disk_load.asm"
+%include "pm/gdt.asm"
+%include "screen/print32.asm"
+%include "pm/switch_pm.asm"
 
 [bits 16]
 load_kernel:

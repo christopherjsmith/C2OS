@@ -36,6 +36,10 @@ Run as follows:
 
     bochs -q
 
+or with QEmu
+
+    qemu os-image.bin
+
 ### 3 Roadmap
 
 1. Complete Bootloader for BootManager 

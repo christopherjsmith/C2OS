@@ -24,10 +24,12 @@ This section describes how to build the current source code. This should be upda
 
     cd boot/
     nasm boot_sect.asm -f bin -o boot_sect.bin
+    nasm kernel_ent.asm -f elf -o kernel_ent.o
 
     cd ../kernel/
-    gcc -ffreestanding -c kernel.c -o kernel.o
-    ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
+
+    gcc -m32 -ffreestanding -c kernel.c -o kernel.o
+    ld -m elf_i386 -o kernel.bin -Ttext 0x1000 ../boot/kernel_ent.o kernel.o --oforma$
 
     cd ..
     cat boot/boot_sect.bin kernel/kernel.bin > os-image.bin

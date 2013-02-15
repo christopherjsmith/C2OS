@@ -32,6 +32,15 @@ This section describes how to build the current source code. This should be upda
     cd ..
     cat boot/boot_sect.bin kernel/kernel.bin > os-image.bin
 
+or see the added build script in root dir
+
+    ./build
+
+if you get permission denied run
+
+    chmod +x ./build
+    ./build
+
 Run as follows:
 
     bochs -q

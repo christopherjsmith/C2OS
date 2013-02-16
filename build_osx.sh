@@ -19,3 +19,12 @@ gcc -Wall -O3 -m32 -ffreestanding -fno-PIC busio.c -S -o ../release/osx/busio.o
 
 cd ..
 cat release/osx/boot_sect.bin release/osx/kernel.o > os-image.bin
+
+echo "--- Build Complete ---"
+echo "launching bochs..."
+bochs -q
+echo "Done, cleaning up..."
+rm -rf release
+find ./ -name "*.bin" | xargs rm -Rf
+find ./ -name "*.o" | xargs rm -Rf
+echo "Cleaned up."

@@ -1,21 +1,21 @@
 #!/bin/bash
-#
+
 # ld seems to not work on Mac as expected
 #
 
 DIRECTORY=release
 if [ ! -d "$DIRECTORY" ]; then
-    mkdir $DIRECTORY
+    mkdir -p $DIRECTORY{osx,linux}
 fi
 
 cd boot/
-nasm boot_sect.asm -f bin -o ../release/boot_sect_osx.bin
-nasm kernel_ent.asm -f elf -o ../release/kernel_ent_osx.o
+nasm boot_sect.asm -f bin -o ../release/osx/boot_sect.bin
+nasm kernel_ent.asm -f elf -o ../release/osx/kernel_ent.o
 
 cd ../kernel/ 
 
-gcc -Wall -O3 -m32 -ffreestanding -fno-PIC kernel.c -S -o ../release/kernel_osx.o
-gcc -Wall -O3 -m32 -ffreestanding -fno-PIC busio.c -S -o ../release/busio_osx.o
+gcc -Wall -O3 -m32 -ffreestanding -fno-PIC kernel.c -S -o ../release/osx/kernel.o
+gcc -Wall -O3 -m32 -ffreestanding -fno-PIC busio.c -S -o ../release/osx/busio.o
 
 cd ..
-cat release/boot_sect_osx.bin release/kernel_osx.o > os-image.bin
+cat release/osx/boot_sect.bin release/osx/kernel.o > os-image.bin

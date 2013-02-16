@@ -1,12 +1,6 @@
-#define MAX_ROWS 25
-#define MAX_COLS 80
-#define WHITE_ON_BLACK 0x0F
-#define VIDEO_MEMORY 0xB8000
-
-#define CTRL 0x3D4
-#define DATA 0x3D5
-
-#include "include/busio.h"
+#include "includes/busio.h"
+#include "../drivers/screen/includes/screen.h"
+#include "../drivers/screen/includes/text.h"
 
 void printX() {
     unsigned char* video_mem = (unsigned char*) VIDEO_MEMORY;
@@ -29,9 +23,11 @@ void main() {
     }
     
     printX();
+    print_char('X', 79, 0, WHITE_ON_BLACK);
+    set_cursor_pos(0, 1);
     
-    byte_out(CTRL, 14);
-    byte_out(DATA, 0x00);
-    byte_out(CTRL, 15);
-    byte_out(DATA, 0x00);
+    int i;
+    for( i = 1; i < 25; i++ ) {
+        print("Hello World!\n");
+    }
 }

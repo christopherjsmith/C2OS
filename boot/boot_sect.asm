@@ -1,3 +1,5 @@
+start:
+
 [org 0x7c00]
 KERNEL_OFFSET equ 0x1000
 mov [BOOT_DRIVE], dl

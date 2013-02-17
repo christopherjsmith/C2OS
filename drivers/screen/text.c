@@ -29,6 +29,9 @@ void print_char(char c, short col, short row, char attrib_byte) {
     
     offset = scroll(offset);
     
+    // TODO: We should really not move HW Cursor all the time, we should store a software cursor
+    //       and use that to track the writing position as HW Cursor is SLOW! And meaning less
+    //       outside of VGA text mode anyway!
     set_cursor_pos( (short)( (offset/2) % MAX_COLS), (short)( (offset/2) / MAX_COLS) );
 }
 
@@ -51,17 +54,35 @@ void print(char* string) {
     print_at(string, -1, -1);
 }
 
+void println(char* string) {
+    print( string );
+    print_char('\n', -1, -1, WHITE_ON_BLACK);
+}
+
 int scroll(int cursor) {
-    if( cursor > (MAX_COLS * MAX_ROWS * 2) ) {
+    if( cursor >= (MAX_COLS * MAX_ROWS * 2) ) {
         memcopy((char*)(VIDEO_MEMORY + (MAX_COLS * 2)), (char*)VIDEO_MEMORY, MAX_COLS*(MAX_ROWS-1)*2);
         
         cursor -= MAX_COLS*2;
         
+        unsigned char* vmem = (unsigned char*) VIDEO_MEMORY;
+        
         int i;
         for(i = 0; i < MAX_COLS; i++) {
-            print_char(' ', i, MAX_ROWS-1, WHITE_ON_BLACK);
+            *(vmem + cursor + i) = 0;
         }
     }
     
     return cursor;
+}
+
+void clear_screen() {
+    int i, j;
+    for(i = 0; i < MAX_COLS; i++) {
+        for(j = 0; j < MAX_ROWS; j++) {
+            print_char(' ', i, j, WHITE_ON_BLACK);
+        }
+    }
+    
+    set_cursor_pos(0, 0);
 }

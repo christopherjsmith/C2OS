@@ -1,5 +1,0 @@
-*.bin
-release/*
-*.o
-*.out
-kernel/C2OS/

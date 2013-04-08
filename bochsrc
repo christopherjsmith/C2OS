@@ -1,4 +1,0 @@
-floppya: 1_44=os-image.bin, status=inserted
-boot: a
-log: bochs.out
-

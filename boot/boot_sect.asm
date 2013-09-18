@@ -37,7 +37,7 @@ load_kernel:
 BEGIN_PM:
 	mov ebx, prot_msg
 	call print32
-
+	            
 	call KERNEL_OFFSET
 
 	jmp $

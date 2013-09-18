@@ -1,0 +1,9 @@
+mov ah, 0
+	mov al, 0x13
+	int 0x10
+
+
+
+	mov eax, 0x4F02
+	mov ebx, 0x118
+	int 0x10

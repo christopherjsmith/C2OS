@@ -86,3 +86,13 @@ void clear_screen() {
     
     set_cursor_pos(0, 0);
 }
+
+void setBackground(char colour) {
+	unsigned char* vmem = (unsigned char*) VIDEO_MEMORY;
+
+	int i;
+	
+	for(i = 0; i < MAX_COLS*MAX_ROWS*2; i += 2) {
+		vmem[ i + 1 ] = (vmem[ i + 1 ] & 0xF) | (colour & 0xF0);
+    }
+}
